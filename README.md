@@ -1,7 +1,7 @@
 # doomsday.py: a Doomsday rule trainer
 
 ## Overview
-A simple command line utility implemented in Python for practicing mental calculation of the day of the week for dates in the Gregorian calendar, using the Doomsday rule algorithm originally described by John Horton Conway [1]. This implementation relies on recent improvements to the algorithm by Chamberlain Fong and Michael K. Walters [[2]] that reduce the complexity of the mental calculation as well as the formula for calculating the anchor day for a century described in the Wikipedia entry for the Doomsday rule [[3]].
+A simple command line utility implemented in Python for practicing mental calculation of the day of the week for dates in the Gregorian calendar, using the Doomsday rule algorithm originally described by John Horton Conway [1]. This implementation relies on recent improvements to the algorithm by Chamberlain Fong and Michael K. Walters [[2]] that reduce the complexity of the mental calculation, as well as on the formula for calculating the anchor day for a century described in the Wikipedia entry for the Doomsday rule [[3]].
 
 ## Requirements
 
