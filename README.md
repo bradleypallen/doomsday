@@ -52,7 +52,7 @@ This code is provided under the terms of an MIT License [[4]]. See the LICENSE f
 
 [[3]] Wikipedia. Doomsday rule. Downloaded from http://en.wikipedia.org/wiki/Doomsday_rule (2012).
 
-[[4]] Open Source Initiative (OSI). The MIT License. <i>Downloaded from http://www.opensource.org/licenses/mit-license.php</i> (2012).
+[[4]] Open Source Initiative (OSI). The MIT License. Downloaded from http://www.opensource.org/licenses/mit-license.php (2012).
 
 [2]: http://arxiv.org/pdf/1010.0765v4.pdf
 [3]: http://en.wikipedia.org/wiki/Doomsday_rule
