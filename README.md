@@ -40,11 +40,11 @@ Python 2.6 or later.
 	$
 
 
-# License
+## License
 
 This code is provided under the terms of an MIT License [[4]]. See the LICENSE file for the copyright notice.
     
-## Bibliography
+## References
 
 [1] Berlekamp, E.R., Conway, J.H. and Guy, R. K. Winning Ways for your Mathematical Plays. Volume 2: Games In Particular. Academic Press, NY (1982).
 
