@@ -104,7 +104,7 @@ def explain_day_of_week(date):
     dm = doomsmonth(date)
     dow = day_of_week(date)
     c = int(str(date.year)[0:2]) + 1
-    print "%d is in the %d century." % (date.year, c)
+    print "%d is in the %s century." % (date.year, ordinal(c))
     print "doomcentury = ((5*%d + floor(%d/4)) mod 7 + Thursday) mod 7" % (c, c-1)
     print "            = ((%d + %d) mod 7 + Thursday) mod 7" % (5*c, (c-1)/4)
     print "            = (%d mod 7 + 4) mod 7" % (5*c+(c-1)/4)
@@ -177,7 +177,7 @@ def main():
         else:
             print "Bad input: type 'q' to quit, 0 - 6 for day of week guess."
     if trials > 0:
-        print "Accuracy = %s over %d trials" % ("{0:.0f}%".format((1. - ((float(errors) / float(trials)))) * 100), trials)
+        print "Accuracy = %s over %d trial%s" % ("{0:.0f}%".format((1. - ((float(errors) / float(trials)))) * 100), trials, "s" if trials > 1 else "")
 
 if __name__ == '__main__':
     main()
