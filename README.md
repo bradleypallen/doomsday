@@ -17,33 +17,35 @@ Python 2.6 or later.
 
     $ ./doomsday.py
 	Type 'q' to quit, 0 - 6 to enter the day of the week.
-	October 30th, 2035? 5
-	Wrong!
-	October 30th, 2035 is in the 21st century.
-	doomcentury = ((5*21 + floor(20/4)) mod 7 + Thursday) mod 7
-	            = ((105 + 5) mod 7 + Thursday) mod 7
-	            = (110 mod 7 + 4) mod 7
-	            = (5 + 4) mod 7
-	            = 9 mod 7
+	February 8th, 1858? 6
+	Wrong! February 8th, 1858 fell on a Monday.
+	1) Calculate the anchor day for the 19th century.
+	doomcentury = ((5*19 + floor(18/4)) mod 7 + Thursday) mod 7
+	            = ((95 + 4) mod 7 + Thursday) mod 7
+	            = (99 mod 7 + 4) mod 7
+	            = (1 + 4) mod 7
+	            = 5 mod 7
+	            = 5
+	2) Calculate the doomsyear for year 58 in the century.
+	doomsyear   = 7's complement of ((58/2)+11 mod 7)
+	            = 7's complement of (40 mod 7)
+	            = 7's complement of 5
 	            = 2
-	2035 is the 35th year in the century.
-	doomsyear   = (7 - (((46+11)/2)+11 mod 7)) mod 7
-	            = (7 - (34 mod 7)) mod 7
-	            = (7 - 6) mod 7
-	            = 1 mod 7
-	            = 1
-	October 10th, 2035 falls on a Doomsday.
-	doomsmonth  = 30 - 10
-	            = 20
+	3) Calculate the doomsmonth for February of the year.
+	1858 was not a leap year, so February 21st, 1858 fell on a Doomsday.
+	doomsmonth  = 8 - 21
+	            = -13
+	4) Calculate the day of the week.
 	day of week = (doomscentury + doomsyear + doomsmonth) mod 7
-	            = (2 + 1 + 20) mod 7
-	            = 23 mod 7
-	            = 2
-	October 30th, 2035 falls on a Tuesday.
-	May 8th, 1905? 1
-	Correct!
-	May 8th, 1905 fell on a Monday.
-	January 21st, 1795? q
+	            = (5 + 2 + -13) mod 7
+	            = -6 mod 7
+	            = 7's complement of (6 mod 7)
+	            = 7's complement of 6
+	            = 1
+	            = Monday
+	August 29th, 2129? 1
+	Correct! August 29th, 2129 falls on a Monday.
+	March 9th, 2580? q
 	Accuracy = 50% over 2 trials
 
 

@@ -112,7 +112,7 @@ def explain_day_of_week(date):
     # Explain the calculation of the doomscentury term.
     dc = doomscentury(date)
     c = int(str(date.year)[0:2]) + 1
-    print "Calculate the anchor year for the %s century." % date_ordinal(c)
+    print "1) Calculate the anchor day for the %s century." % date_ordinal(c)
     print "doomcentury = ((5*%d + floor(%d/4)) mod 7 + Thursday) mod 7" % (c, c-1)
     print "            = ((%d + %d) mod 7 + Thursday) mod 7" % (5*c, (c-1)/4)
     print "            = (%d mod 7 + 4) mod 7" % (5*c+(c-1)/4)
@@ -122,7 +122,7 @@ def explain_day_of_week(date):
     # Explain the calculation of the doomsyear term.
     dy = doomsyear(date)
     x = int(str(date.year)[2:])
-    print "Calculate the doomsyear for year %s in the century." % x
+    print "2) Calculate the doomsyear for year %s in the century." % x
     x_str = str(x)
     if x % 2 == 1:
         x_str = "(%d+11)" % x
@@ -132,14 +132,13 @@ def explain_day_of_week(date):
     if x % 2 == 1:
         x_str = "(%s)+11" % x_str
         x = x + 11
-    print "doomsyear   = (7 - (%s mod 7)) mod 7" % x_str
-    print "            = (7 - (%d mod 7)) mod 7" % x
-    print "            = (7 - %d) mod 7" % (x%7)
-    print "            = %d mod 7" % (7 - (x%7))
+    print "doomsyear   = 7's complement of (%s mod 7)" % x_str
+    print "            = 7's complement of (%d mod 7)" % x
+    print "            = 7's complement of %d" % (x%7)
     print "            = %d" % dy
     # Explain the calculation of the doomsmonth term.
     dm = doomsmonth(date)
-    print "Calculate the doomsmonth for %s of the year." % calendar.month_name[date.month]
+    print "3) Calculate the doomsmonth for %s of the year." % calendar.month_name[date.month]
     if date.month == 1:
         print "%d %s%s a leap year, so" % (date.year, correct_tense(date, "was", "is"), "" if leapyear(date.year) else " not"),
         if leapyear(date.year):
@@ -170,16 +169,18 @@ def explain_day_of_week(date):
     print "            = %d" % dm
     # Finally, explain the day of week calculation.
     dow = day_of_week(date)
+    print "4) Calculate the day of the week."
     print "day of week = (doomscentury + doomsyear + doomsmonth) mod 7"
     print "            = (%d + %d + %d) mod 7" % (dc, dy, dm)
     sum = dc + dy + dm
     if sum < 0:
         print "            = %d mod 7" % sum
-        print "            = 7 - (%d mod 7)" % -sum
-        print "            = 7 - %d" % (-sum % 7)
+        print "            = 7's complement of (%d mod 7)" % -sum
+        print "            = 7's complement of %d" % (-sum % 7)
     else:
         print "            = %d mod 7" % sum
     print "            = %d" % dow
+    print "            = %s" % dow_name[dow]
 
 # A command line loop for training a user in the mental calculation of
 # the day of the week using the Doomsday algorithm.
