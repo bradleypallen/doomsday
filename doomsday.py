@@ -176,7 +176,7 @@ def explain_day_of_week(date):
     if sum < 0:
         print "            = %d mod 7" % sum
         print "            = 7 - (%d mod 7)" % -sum
-        print "            = 7 - %d" % (sum % 7)
+        print "            = 7 - %d" % (-sum % 7)
     else:
         print "            = %d mod 7" % sum
     print "            = %d" % dow
@@ -200,12 +200,12 @@ def main():
             dow = day_of_week(date)
             trials += 1
             if answer == dow:
-                print "Correct!"
+                print "Correct! %s %s on a %s." % (date_str(date), correct_tense(date, "fell", "falls"), dow_name[dow])
+
             else:
                 errors += 1
-                print "Wrong!"
+                print "Wrong! %s %s on a %s." % (date_str(date), correct_tense(date, "fell", "falls"), dow_name[dow])
                 explain_day_of_week(date)
-            print "%s %s on a %s." % (date_str(date), correct_tense(date, "fell", "falls"), dow_name[dow])
         else:
             print "Bad input: type 'q' to quit, 0 - 6 to enter the day of the week."
     if trials > 0:
