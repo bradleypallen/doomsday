@@ -1,17 +1,18 @@
 #!/usr/bin/env python
 
+import datetime, calendar, math, random
+
 # doomsday.py: a command line trainer for the mental calculation
 # of the day of the week for any date in the Gregorian calendar,
 # using the Doomsday algorithm original developed by John Horton Conway.
 
-import datetime, calendar, math, random
-
 # Given that the Doomsday algorithm works for the Gregorian calendar,
 # we refrain from training on dates earlier than the date of its earliest
-# adoption, October 15th, 1582.
+# adoption, October 15th, 1582 (until such time as we manage to capture
+# conversion to old/new-style Julian calendars, regional adoption timeframes, etc.)
 OCTOBER_15TH_1582 = datetime.date(1582, 10, 15).toordinal()
 
-# Additionally, we arbitrary limit training to dates no later than 
+# Additionally, we arbitrarily limit training to dates no later than 
 # the last day of the year 2600.
 DECEMBER_31ST_2600 = datetime.date(2600, 12, 31).toordinal()
 
@@ -20,7 +21,7 @@ DECEMBER_31ST_2600 = datetime.date(2600, 12, 31).toordinal()
 dow_name = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
 
 # From http://stackoverflow.com/questions/739241/python-date-ordinal-output,
-# a routine for providing an ordinal description of the day of the date.
+# we include a routine for providing an ordinal description of the day of the date.
 def date_ordinal(n):
     if 10 <= n % 100 < 20:
         return str(n) + 'th'
