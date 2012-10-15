@@ -173,12 +173,10 @@ def explain_day_of_week(date):
     print "day of week = (doomscentury + doomsyear + doomsmonth) mod 7"
     print "            = (%d + %d + %d) mod 7" % (dc, dy, dm)
     sum = dc + dy + dm
+    print "            = %d mod 7" % sum
     if sum < 0:
-        print "            = %d mod 7" % sum
         print "            = 7's complement of (%d mod 7)" % -sum
         print "            = 7's complement of %d" % (-sum % 7)
-    else:
-        print "            = %d mod 7" % sum
     print "            = %d" % dow
     print "            = %s" % dow_name[dow]
 
