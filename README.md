@@ -16,28 +16,35 @@ Python 2.6 or later.
 ## Usage
 
     $ ./doomsday.py
-    Type 'q' to quit, 0 - 6 for day of week guess.
-	December 9th, 1917? 3
+	Type 'q' to quit, 0 - 6 to enter the day of the week.
+	October 30th, 2035? 5
 	Wrong!
-	1917 is in the 20 century.
-	doomcentury = ((5*20 + floor(19/4)) mod 7 + Thursday) mod 7
-	            = ((100 + 4) mod 7 + Thursday) mod 7
-	            = (104 mod 7 + 4) mod 7
-	            = (6 + 4) mod 7
-	            = 10 mod 7
-	            = 3
-	1917 is the 17th year in the 20th century.
-	Let x = 17.
-	17 is odd, so set x = x + 11 = 28
-	28 / 2 = 14.
-	doomsyear = (7 - (14 mod 7)) mod 7 = (7 - 0) mod 7 = 7 mod 7 = 0
-	doomsmonth = (9 - 12) = -3
-	day of week = (doomscentury + doomsyear + doomsmonth) mod 7 = (3 + 0 + -3) mod 7 = 0
-	April 9th, 2000? 0
+	October 30th, 2035 is in the 21st century.
+	doomcentury = ((5*21 + floor(20/4)) mod 7 + Thursday) mod 7
+	            = ((105 + 5) mod 7 + Thursday) mod 7
+	            = (110 mod 7 + 4) mod 7
+	            = (5 + 4) mod 7
+	            = 9 mod 7
+	            = 2
+	2035 is the 35th year in the century.
+	doomsyear   = (7 - (((46+11)/2)+11 mod 7)) mod 7
+	            = (7 - (34 mod 7)) mod 7
+	            = (7 - 6) mod 7
+	            = 1 mod 7
+	            = 1
+	October 10th, 2035 falls on a Doomsday.
+	doomsmonth  = 30 - 10
+	            = 20
+	day of week = (doomscentury + doomsyear + doomsmonth) mod 7
+	            = (2 + 1 + 20) mod 7
+	            = 23 mod 7
+	            = 2
+	October 30th, 2035 falls on a Tuesday.
+	May 8th, 1905? 1
 	Correct!
-	May 26th, 1679? q
+	May 8th, 1905 fell on a Monday.
+	January 21st, 1795? q
 	Accuracy = 50% over 2 trials
-	$
 
 
 ## License
