@@ -112,7 +112,7 @@ def explain_day_of_week(date):
     # Explain the calculation of the doomscentury term.
     dc = doomscentury(date)
     c = int(str(date.year)[0:2]) + 1
-    print "%s %s in the %s century." % (date_str(date), correct_tense(date, "was", "is"), date_ordinal(c))
+    print "Calculate the anchor year for the %s century." % date_ordinal(c)
     print "doomcentury = ((5*%d + floor(%d/4)) mod 7 + Thursday) mod 7" % (c, c-1)
     print "            = ((%d + %d) mod 7 + Thursday) mod 7" % (5*c, (c-1)/4)
     print "            = (%d mod 7 + 4) mod 7" % (5*c+(c-1)/4)
@@ -122,16 +122,16 @@ def explain_day_of_week(date):
     # Explain the calculation of the doomsyear term.
     dy = doomsyear(date)
     x = int(str(date.year)[2:])
-    print "%d %s the %s year in the century." % (date.year, correct_tense(date, "was", "is"), date_ordinal(x))
+    print "Calculate the doomsyear for year %s in the century." % x
     x_str = str(x)
     if x % 2 == 1:
-        x = x + 11
         x_str = "(%d+11)" % x
+        x = x + 11
     x = x / 2
     x_str = x_str + '/2'
     if x % 2 == 1:
-        x = x + 11
         x_str = "(%s)+11" % x_str
+        x = x + 11
     print "doomsyear   = (7 - (%s mod 7)) mod 7" % x_str
     print "            = (7 - (%d mod 7)) mod 7" % x
     print "            = (7 - %d) mod 7" % (x%7)
@@ -139,6 +139,7 @@ def explain_day_of_week(date):
     print "            = %d" % dy
     # Explain the calculation of the doomsmonth term.
     dm = doomsmonth(date)
+    print "Calculate the doomsmonth for %s of the year." % calendar.month_name[date.month]
     if date.month == 1:
         print "%d %s%s a leap year, so" % (date.year, correct_tense(date, "was", "is"), "" if leapyear(date.year) else " not"),
         if leapyear(date.year):
@@ -171,7 +172,13 @@ def explain_day_of_week(date):
     dow = day_of_week(date)
     print "day of week = (doomscentury + doomsyear + doomsmonth) mod 7"
     print "            = (%d + %d + %d) mod 7" % (dc, dy, dm)
-    print "            = %d mod 7" % (dc+dy+dm)
+    sum = dc + dy + dm
+    if sum < 0:
+        print "            = %d mod 7" % sum
+        print "            = 7 - (%d mod 7)" % -sum
+        print "            = 7 - %d" % (sum % 7)
+    else:
+        print "            = %d mod 7" % sum
     print "            = %d" % dow
 
 # A command line loop for training a user in the mental calculation of
