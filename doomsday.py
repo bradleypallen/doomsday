@@ -4,7 +4,7 @@ import datetime, calendar, math, random
 
 # doomsday.py: a command line trainer for the mental calculation
 # of the day of the week for any date in the Gregorian calendar,
-# using the Doomsday algorithm original developed by John Horton Conway.
+# using the Doomsday algorithm originally developed by John Horton Conway.
 
 # Given that the Doomsday algorithm works for the Gregorian calendar,
 # we refrain from training on dates earlier than the date of its earliest
