@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+from __future__ import print_function
 import datetime, calendar, math, random
 
 # doomsday.py: a command line trainer for the mental calculation
@@ -53,7 +54,7 @@ def leapyear(year):
 def doomscentury(date):
     thursday = 4
     c = int(str(date.year)[0:2]) + 1
-    return ((((5 * c) + ((c - 1) / 4)) % 7) + thursday) % 7
+    return int((((5 * c) + ((c - 1) / 4)) % 7) + thursday) % 7
 
 # The second term in the doomsday.day_of_week() calculation, using
 # Fong and Walters' Odds+11 method from http://arxiv.org/abs/1010.0765.
@@ -65,7 +66,7 @@ def doomsyear(date):
     if x % 2 == 1:
         x = x + 11
     x = x % 7
-    return (7 - x) % 7
+    return int((7 - x) % 7)
 
 # The third term in the doomsday.day_of_week() calculation, calculating
 # the difference in days between the day of the month in question and
@@ -112,17 +113,17 @@ def explain_day_of_week(date):
     # Explain the calculation of the doomscentury term.
     dc = doomscentury(date)
     c = int(str(date.year)[0:2]) + 1
-    print "1) Calculate the anchor day for the %s century." % date_ordinal(c)
-    print "doomcentury = ((5*%d + floor(%d/4)) mod 7 + Thursday) mod 7" % (c, c-1)
-    print "            = ((%d + %d) mod 7 + Thursday) mod 7" % (5*c, (c-1)/4)
-    print "            = (%d mod 7 + 4) mod 7" % (5*c+(c-1)/4)
-    print "            = (%d + 4) mod 7" % ((5*c+(c-1)/4)%7)
-    print "            = %d mod 7" % (((5*c+(c-1)/4) % 7)+4)
-    print "            = %d" % dc
+    print("1) Calculate the anchor day for the %s century." % date_ordinal(c))
+    print("doomcentury = ((5*%d + floor(%d/4)) mod 7 + Thursday) mod 7" % (c, c-1))
+    print("            = ((%d + %d) mod 7 + Thursday) mod 7" % (5*c, (c-1)/4))
+    print("            = (%d mod 7 + 4) mod 7" % (5*c+(c-1)/4))
+    print("            = (%d + 4) mod 7" % ((5*c+(c-1)/4)%7))
+    print("            = %d mod 7" % (((5*c+(c-1)/4) % 7)+4))
+    print("            = %d" % dc)
     # Explain the calculation of the doomsyear term.
     dy = doomsyear(date)
     x = int(str(date.year)[2:])
-    print "2) Calculate the doomsyear for year %s in the century." % x
+    print("2) Calculate the doomsyear for year %s in the century." % x)
     x_str = str(x)
     if x % 2 == 1:
         x_str = "(%d+11)" % x
@@ -132,21 +133,21 @@ def explain_day_of_week(date):
     if x % 2 == 1:
         x_str = "(%s)+11" % x_str
         x = x + 11
-    print "doomsyear   = 7's complement of (%s mod 7)" % x_str
-    print "            = 7's complement of (%d mod 7)" % x
-    print "            = 7's complement of %d" % (x%7)
-    print "            = %d" % dy
+    print("doomsyear   = 7's complement of (%s mod 7)" % x_str)
+    print("            = 7's complement of (%d mod 7)" % x)
+    print("            = 7's complement of %d" % (x%7))
+    print("            = %d" % dy)
     # Explain the calculation of the doomsmonth term.
     dm = doomsmonth(date)
-    print "3) Calculate the doomsmonth for %s of the year." % calendar.month_name[date.month]
+    print("3) Calculate the doomsmonth for %s of the year." % calendar.month_name[date.month])
     if date.month == 1:
-        print "%d %s%s a leap year, so" % (date.year, correct_tense(date, "was", "is"), "" if leapyear(date.year) else " not"),
+        print("%d %s%s a leap year, so" % (date.year, correct_tense(date, "was", "is"), "" if leapyear(date.year) else " not")),
         if leapyear(date.year):
             month_doomsday = 11
         else:
             month_doomsday = 10
     elif date.month == 2:
-        print "%d %s%s a leap year, so" % (date.year, correct_tense(date, "was", "is"), "" if leapyear(date.year) else " not"), 
+        print("%d %s%s a leap year, so" % (date.year, correct_tense(date, "was", "is"), "" if leapyear(date.year) else " not")), 
         if leapyear(date.year):
             month_doomsday = 22
         else:
@@ -164,21 +165,21 @@ def explain_day_of_week(date):
     else: # date.month == 11
         month_doomsday = 7
     month_doomsday_date = datetime.date(date.year, date.month, month_doomsday)
-    print "%s %s on a Doomsday." % (date_str(month_doomsday_date), correct_tense(month_doomsday_date, "fell", "falls"))
-    print "doomsmonth  = %d - %s" % (date.day, month_doomsday)
-    print "            = %d" % dm
+    print("%s %s on a Doomsday." % (date_str(month_doomsday_date), correct_tense(month_doomsday_date, "fell", "falls")))
+    print("doomsmonth  = %d - %s" % (date.day, month_doomsday))
+    print("            = %d" % dm)
     # Finally, explain the day of week calculation.
     dow = day_of_week(date)
-    print "4) Calculate the day of the week."
-    print "day of week = (doomscentury + doomsyear + doomsmonth) mod 7"
-    print "            = (%d + %d + %d) mod 7" % (dc, dy, dm)
+    print("4) Calculate the day of the week.")
+    print("day of week = (doomscentury + doomsyear + doomsmonth) mod 7")
+    print("            = (%d + %d + %d) mod 7" % (dc, dy, dm))
     sum = dc + dy + dm
-    print "            = %d mod 7" % sum
+    print("            = %d mod 7" % sum)
     if sum < 0:
-        print "            = 7's complement of (%d mod 7)" % -sum
-        print "            = 7's complement of %d" % (-sum % 7)
-    print "            = %d" % dow
-    print "            = %s" % dow_name[dow]
+        print("            = 7's complement of (%d mod 7)" % -sum)
+        print("            = 7's complement of %d" % (-sum % 7))
+    print("            = %d" % dow)
+    print("            = %s" % dow_name[dow])
 
 # A command line loop for training a user in the mental calculation of
 # the day of the week using the Doomsday algorithm.
@@ -188,27 +189,26 @@ def explain_day_of_week(date):
 def main():
     trials = 0
     errors = 0
-    print "Type 'q' to quit, 0 - 6 to enter the day of the week."
+    print("Type 'q' to quit, 0 - 6 to enter the day of the week.")
     while True:
         date = datetime.date.fromordinal(random.randint(OCTOBER_15TH_1582, DECEMBER_31ST_2600))
-        input = raw_input("%s? " % date_str(date))
-        if input == 'q':
+        input_dow = input("%s? " % date_str(date))
+        if input_dow == 'q':
             break
-        elif input.isdigit():
-            answer = int(input)
+        elif input_dow.isdigit():
+            answer = int(input_dow)
             dow = day_of_week(date)
             trials += 1
             if answer == dow:
-                print "Correct! %s %s on a %s." % (date_str(date), correct_tense(date, "fell", "falls"), dow_name[dow])
-
+                print("Correct! %s %s on a %s." % (date_str(date), correct_tense(date, "fell", "falls"), dow_name[dow]))
             else:
                 errors += 1
-                print "Wrong! %s %s on a %s." % (date_str(date), correct_tense(date, "fell", "falls"), dow_name[dow])
+                print("Wrong! %s %s on a %s." % (date_str(date), correct_tense(date, "fell", "falls"), dow_name[dow]))
                 explain_day_of_week(date)
         else:
-            print "Bad input: type 'q' to quit, 0 - 6 to enter the day of the week."
+            print("Bad input: type 'q' to quit, 0 - 6 to enter the day of the week.")
     if trials > 0:
-        print "Accuracy = %s over %d trial%s" % ("{0:.0f}%".format((1. - ((float(errors) / float(trials)))) * 100), trials, "s" if trials > 1 else "")
+        print("Accuracy = %s over %d trial%s" % ("{0:.0f}%".format((1. - ((float(errors) / float(trials)))) * 100), trials, "s" if trials > 1 else ""))
 
 if __name__ == '__main__':
     main()
