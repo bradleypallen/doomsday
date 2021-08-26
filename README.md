@@ -1,58 +1,95 @@
-# doomsday.py: a Doomsday rule trainer
+# doomsday: a Doomsday rule utility and trainer
+[![PyPI](https://img.shields.io/pypi/v/doomsday.svg)](https://pypi.org/project/doomsday/)
+[![Changelog](https://img.shields.io/github/v/release/bradleypallen/doomsday?include_prereleases&label=changelog)](https://github.com/bradleypallen/doomsday/releases)
+[![Tests](https://github.com/bradleypallen/doomsday/workflows/Test/badge.svg)](https://github.com/bradleypallen/doomsday/actions?query=workflow%3ATest)
+[![License](https://img.shields.io/github/license/bradleypallen/doomsday)](https://github.com/bradleypallen/doomsday/blob/main/LICENSE)
 
-## Overview
 A simple command line utility implemented in Python for practicing mental calculation of the day of the week for dates in the Gregorian calendar, using the Doomsday rule algorithm originally described by John Horton Conway [1]. This implementation relies on recent improvements to the algorithm by Chamberlain Fong and Michael K. Walters [[2]] that reduce the complexity of the mental calculation, as well as on the formula for calculating the anchor day for a century described in the Wikipedia entry for the Doomsday rule [[3]].
+
+```
+$ doomsday --help
+Usage: doomsday [OPTIONS] COMMAND [ARGS]...
+
+Options:
+  --help  Show this message and exit.
+
+Commands:
+  dayofweek     Calculate the day of the week for DATE.
+  doomscentury  Calculate the anchor day for the century of YEAR.
+  doomsmonth    Calculate the doomsmonth for DATE.
+  doomsyear     Calculate the doomsyear for YEAR.
+  leapyear      Determine if YEAR is a leap year.
+  test          Estimate your accuracy in calculating the day of the week.
+
+$ doomsday leapyear --help
+Usage: doomsday leapyear [OPTIONS] YEAR
+
+  Determine if YEAR is a leap year.
+
+Options:
+  --explain  Provide a walkthrough of the calculation.
+  --help     Show this message and exit.
+
+$ doomsday doomscentury --help
+Usage: doomsday doomscentury [OPTIONS] YEAR
+
+  Calculate the anchor day for the century of YEAR.
+
+Options:
+  --explain  Provide a walkthrough of the calculation.
+  --help     Show this message and exit.
+
+$ doomsday doomsyear --help
+Usage: doomsday doomsyear [OPTIONS] YEAR
+
+  Calculate the doomsyear for YEAR.
+
+Options:
+  --explain  Provide a walkthrough of the calculation.
+  --help     Show this message and exit.
+
+$ doomsday doomsmonth --help
+Usage: doomsday doomsmonth [OPTIONS] [%Y-%m-%d|%Y-%m-%dT%H:%M:%S|%Y-%m-%d
+                           %H:%M:%S]
+
+  Calculate the doomsmonth for DATE.
+
+Options:
+  --explain  Provide a walkthrough of the calculation.
+  --help     Show this message and exit.
+
+$ doomsday dayofweek --help
+Usage: doomsday dayofweek [OPTIONS] [%Y-%m-%d|%Y-%m-%dT%H:%M:%S|%Y-%m-%d
+                          %H:%M:%S]
+
+  Calculate the day of the week for DATE.
+
+Options:
+  --explain  Provide a walkthrough of the calculation.
+  --help     Show this message and exit.
+
+$ doomsday test --help
+Usage: doomsday test [OPTIONS]
+
+  Estimate your accuracy in calculating the day of the week.
+
+Options:
+  --trials INTEGER RANGE  [1<=x<=100]
+  --help                  Show this message and exit.
+```
 
 ## Requirements
 
-Python 2.6 or later.
+Python 3.6 or later.
 
 ## Installation
 
-    $ git clone https://github.com/bradleypallen/doomsday.git
-    $ cd doomsday
-    $ chmod +x *.py
-    
-## Usage
-
-    $ ./doomsday.py
-	Type 'q' to quit, 0 - 6 to enter the day of the week.
-	February 8th, 1858? 6
-	Wrong! February 8th, 1858 fell on a Monday.
-	1) Calculate the anchor day for the 19th century.
-	doomcentury = ((5*19 + floor(18/4)) mod 7 + Thursday) mod 7
-	            = ((95 + 4) mod 7 + Thursday) mod 7
-	            = (99 mod 7 + 4) mod 7
-	            = (1 + 4) mod 7
-	            = 5 mod 7
-	            = 5
-	2) Calculate the doomsyear for year 58 in the century.
-	doomsyear   = 7's complement of ((58/2)+11 mod 7)
-	            = 7's complement of (40 mod 7)
-	            = 7's complement of 5
-	            = 2
-	3) Calculate the doomsmonth for February of the year.
-	1858 was not a leap year, so February 21st, 1858 fell on a Doomsday.
-	doomsmonth  = 8 - 21
-	            = -13
-	4) Calculate the day of the week.
-	day of week = (doomscentury + doomsyear + doomsmonth) mod 7
-	            = (5 + 2 + -13) mod 7
-	            = -6 mod 7
-	            = 7's complement of (6 mod 7)
-	            = 7's complement of 6
-	            = 1
-	            = Monday
-	August 29th, 2129? 1
-	Correct! August 29th, 2129 falls on a Monday.
-	March 9th, 2580? q
-	Accuracy = 50% over 2 trials
-
+    $ pip install doomsday
 
 ## License
 
-This code is provided under the terms of an MIT License [[4]]. See the LICENSE file for the copyright notice.
-    
+This code is provided under the terms of an MIT License. See the LICENSE file for the copyright notice.
+
 ## References
 
 [1] Berlekamp, E.R., Conway, J.H. and Guy, R. K. Winning Ways for your Mathematical Plays. Volume 2: Games In Particular. Academic Press, NY (1982).
@@ -61,8 +98,5 @@ This code is provided under the terms of an MIT License [[4]]. See the LICENSE f
 
 [[3]] Wikipedia. Doomsday rule. Downloaded from http://en.wikipedia.org/wiki/Doomsday_rule (2012).
 
-[[4]] Open Source Initiative (OSI). The MIT License. Downloaded from http://www.opensource.org/licenses/mit-license.php (2012).
-
 [2]: http://arxiv.org/pdf/1010.0765v4.pdf
 [3]: http://en.wikipedia.org/wiki/Doomsday_rule
-[4]: http://www.opensource.org/licenses/mit-license.php
