@@ -73,8 +73,9 @@ def explain_doomsyear(year):
 
 def explain_doomsmonth(year, month, day):
     dm = methods.doomsmonth(year, month, day)
+    date = datetime.date(year, month, day)
     if month == 1:
-        print("%d %s%s a leap year, so" % (date.year, correct_tense(date, "was", "is", "will be"), "" if methods.leapyear(year) else " not")),
+        print("%d %s%s a leap year, so" % (year, correct_tense(date, "was", "is", "will be"), "" if methods.leapyear(year) else " not")),
         if methods.leapyear(year):
             month_doomsday = 11
         else:
