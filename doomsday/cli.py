@@ -191,10 +191,12 @@ def test(num_of_tests):
         date = datetime.date.fromordinal(random.randint(OCTOBER_15TH_1582, DECEMBER_31ST_2600))
         correct_answer = methods.day_of_week(date.year, date.month, date.day)
         answer = input(f'{date_str(date)}? ')
-        click.echo(f'{date_str(date)} {correct_tense(date, "was", "is", "will be")} a {correct_answer}.')
-        if answer == correct_answer:
+        if answer.lower() == correct_answer.lower():
+            click.echo('Correct!')
             correct_answers += 1
-    click.echo(f'Accuracy: {float(correct_answers)/float(num_of_tests):.0%} over {num_of_tests} tests.')
+        else:
+            click.echo(f'Incorrect - {date_str(date)} {correct_tense(date, "was", "is", "will be")} a {correct_answer}.')
+    click.echo(f'\nAccuracy: {correct_answers/num_of_tests:.0%} over {num_of_tests} tests.')
 
 cli.add_command(leapyear)
 cli.add_command(doomscentury)
