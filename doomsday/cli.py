@@ -1,4 +1,5 @@
 import click, datetime, calendar, random, readline
+from timeit import default_timer as timer
 from . import methods
 
 # Given that the Doomsday algorithm works for the Gregorian calendar,
