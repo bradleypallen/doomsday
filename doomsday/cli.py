@@ -185,8 +185,9 @@ def dayofweek(date, explain):
 @click.command()
 @click.option('-n', '--num-of-tests', type=click.IntRange(min=1), default=10, help="Number of tests to perform.")
 def test(num_of_tests):
-    """Estimate your accuracy in calculating the day of the week."""
+    """Test your speed and accuracy in calculating the day of the week."""
     correct_answers = 0
+    start_time = timer()
     for i in range(num_of_tests):
         date = datetime.date.fromordinal(random.randint(OCTOBER_15TH_1582, DECEMBER_31ST_2600))
         correct_answer = methods.day_of_week(date.year, date.month, date.day)
@@ -196,7 +197,9 @@ def test(num_of_tests):
             correct_answers += 1
         else:
             click.echo(f'Incorrect - {date_str(date)} {correct_tense(date, "was", "is", "will be")} a {correct_answer}.')
+    time_elapsed = timer() - start_time
     click.echo(f'\nAccuracy: {correct_answers/num_of_tests:.0%} over {num_of_tests} tests.')
+    click.echo(f'Speed:    {time_elapsed:.1f}s total, average of {time_elapsed/num_of_tests:.1f}s per test.')
 
 cli.add_command(leapyear)
 cli.add_command(doomscentury)
