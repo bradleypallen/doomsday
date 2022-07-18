@@ -1,4 +1,4 @@
-import click, datetime, calendar, random, readline
+import click, datetime, calendar, random
 from timeit import default_timer as timer
 from . import methods
 
