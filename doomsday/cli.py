@@ -1,4 +1,4 @@
-import click, datetime, calendar, random, readline
+import click, datetime, calendar, random
 from . import methods
 
 # Given that the Doomsday algorithm works for the Gregorian calendar,
