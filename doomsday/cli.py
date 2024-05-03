@@ -1,4 +1,5 @@
 import click, datetime, calendar, random
+from timeit import default_timer as timer
 from . import methods
 
 # Given that the Doomsday algorithm works for the Gregorian calendar,
@@ -183,18 +184,23 @@ def dayofweek(date, explain):
         click.echo(f'{methods.day_of_week(date.year, date.month, date.day)}')
 
 @click.command()
-@click.option('--trials', type=click.IntRange(1, 100), default=10)
-def test(trials):
-    """Estimate your accuracy in calculating the day of the week."""
+@click.option('-n', '--num-of-tests', type=click.IntRange(min=1), default=10, help="Number of tests to perform.")
+def test(num_of_tests):
+    """Test your speed and accuracy in calculating the day of the week."""
     correct_answers = 0
-    for i in range(trials):
+    start_time = timer()
+    for i in range(num_of_tests):
         date = datetime.date.fromordinal(random.randint(OCTOBER_15TH_1582, DECEMBER_31ST_2600))
         correct_answer = methods.day_of_week(date.year, date.month, date.day)
         answer = input(f'{date_str(date)}? ')
-        click.echo(f'{date_str(date)} {correct_tense(date, "was", "is", "will be")} a {correct_answer}.')
-        if answer == correct_answer:
+        if answer.lower() == correct_answer.lower():
+            click.echo('Correct!')
             correct_answers += 1
-    click.echo(f'Accuracy: {float(correct_answers)/float(trials):.0%} over {trials} trials.')
+        else:
+            click.echo(f'Incorrect - {date_str(date)} {correct_tense(date, "was", "is", "will be")} a {correct_answer}.')
+    time_elapsed = timer() - start_time
+    click.echo(f'\nAccuracy: {correct_answers/num_of_tests:.0%} over {num_of_tests} tests.')
+    click.echo(f'Speed:    {time_elapsed:.1f}s total, average of {time_elapsed/num_of_tests:.1f}s per test.')
 
 cli.add_command(leapyear)
 cli.add_command(doomscentury)
